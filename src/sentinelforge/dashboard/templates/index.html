@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SentinelForge — Autonomous SOC Dashboard</title>
+<link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <h1 class="logo">&#x1f6e1; SentinelForge</h1>
+    <span class="badge live">LIVE</span>
+  </div>
+  <div class="header-right">
+    <span class="status-text" id="connection-status">Connecting...</span>
+    <span class="timestamp" id="last-update"></span>
+  </div>
+</header>
+
+<main class="main">
+  <!-- Metrics Row -->
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Alerts</div>
+      <div class="metric-value" id="total-alerts">0</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Incidents</div>
+      <div class="metric-value" id="total-incidents">0</div>
+    </div>
+    <div class="metric-card critical">
+      <div class="metric-label">Critical</div>
+      <div class="metric-value" id="critical-count">0</div>
+    </div>
+    <div class="metric-card high">
+      <div class="metric-label">High</div>
+      <div class="metric-value" id="high-count">0</div>
+    </div>
+    <div class="metric-card medium">
+      <div class="metric-label">Medium</div>
+      <div class="metric-value" id="medium-count">0</div>
+    </div>
+    <div class="metric-card low">
+      <div class="metric-label">Auto-Closed</div>
+      <div class="metric-value" id="auto-closed-count">0</div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="alerts">Alert Feed</button>
+    <button class="tab" data-tab="incidents">Incidents</button>
+    <button class="tab" data-tab="timeline">Timeline</button>
+  </nav>
+
+  <!-- Alert Feed -->
+  <section class="tab-content active" id="tab-alerts">
+    <div class="table-controls">
+      <select id="severity-filter">
+        <option value="">All Severities</option>
+        <option value="CRITICAL">Critical</option>
+        <option value="HIGH">High</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="LOW">Low</option>
+        <option value="INFO">Info</option>
+      </select>
+    </div>
+    <table class="alert-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Severity</th>
+          <th>Category</th>
+          <th>Source IP</th>
+          <th>ATT&CK</th>
+          <th>Activity</th>
+          <th>Verdict</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="alert-table-body">
+        <tr><td colspan="8" class="empty-state">Loading alerts...</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Incidents -->
+  <section class="tab-content" id="tab-incidents">
+    <table class="alert-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Severity</th>
+          <th>Title</th>
+          <th>Alerts</th>
+          <th>Kill Chain</th>
+          <th>Tactics</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="incident-table-body">
+        <tr><td colspan="7" class="empty-state">No incidents yet.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Timeline -->
+  <section class="tab-content" id="tab-timeline">
+    <div class="timeline" id="timeline-container">
+      <p class="empty-state">Select an incident to view its timeline.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>SentinelForge v0.1.0 — Autonomous SOC Analyst Platform</span>
+  <span>Created by Corey A. Wade (CISSP, CCIE #14124)</span>
+</footer>
+
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>

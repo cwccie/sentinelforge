@@ -1,0 +1,65 @@
+name: Phishing Response
+description: >
+  Response playbook for phishing email incidents. Quarantines malicious
+  emails, resets compromised credentials, and scans for secondary infections.
+trigger_conditions:
+  mitre_technique_id: "T1566"
+  category: "Email"
+  tags:
+    - phishing
+severity_threshold: MEDIUM
+tags:
+  - phishing
+  - email
+  - social-engineering
+
+steps:
+  - name: Alert SOC
+    action: send_notification
+    description: Notify SOC team of confirmed phishing incident
+    requires_approval: false
+    parameters:
+      channel: soc-alerts
+      priority: high
+      message: "Phishing email confirmed — response initiated"
+
+  - name: Quarantine Malicious Email
+    action: quarantine_email
+    description: Remove the phishing email from all recipient mailboxes
+    requires_approval: true
+    parameters:
+      scope: organization
+      search_criteria: "subject, sender, message_id"
+
+  - name: Block Sender Domain
+    action: block_ip
+    description: Block the sending domain at email gateway
+    requires_approval: true
+    parameters:
+      scope: email_gateway
+      block_type: domain
+
+  - name: Reset Affected User Credentials
+    action: reset_credentials
+    description: Force password reset for users who clicked the phishing link
+    requires_approval: true
+    parameters:
+      force_mfa: true
+      revoke_sessions: true
+
+  - name: Scan User Endpoints
+    action: scan_endpoints
+    description: Scan endpoints of users who interacted with the phishing email
+    requires_approval: false
+    parameters:
+      scope: affected_users
+      scan_type: full
+      check_for: malware_download
+
+  - name: Update Email Filters
+    action: update_signatures
+    description: Update email security rules with new phishing indicators
+    requires_approval: false
+    parameters:
+      type: email_gateway
+      indicators: "sender, subject_pattern, url_pattern"

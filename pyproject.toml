@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinelforge"
+version = "0.1.0"
+description = "Autonomous SOC Analyst Platform — AI-driven alert triage, log correlation, threat hunting, and incident response"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Corey A. Wade", email = "corey@cwccie.com"},
+]
+keywords = ["security", "soc", "siem", "mitre-attack", "threat-hunting", "incident-response", "cybersecurity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: System :: Monitoring",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+web = [
+    "flask>=3.0",
+    "flask-sock>=0.7",
+]
+cli = [
+    "click>=8.0",
+]
+ml = [
+    "numpy>=1.24",
+]
+yaml = [
+    "pyyaml>=6.0",
+]
+all = [
+    "sentinelforge[web,cli,ml,yaml]",
+]
+dev = [
+    "sentinelforge[all]",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+sentinelforge = "sentinelforge.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/cwccie/sentinelforge"
+Repository = "https://github.com/cwccie/sentinelforge"
+Issues = "https://github.com/cwccie/sentinelforge/issues"
+Documentation = "https://github.com/cwccie/sentinelforge#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP"]
+
+[tool.coverage.run]
+source = ["sentinelforge"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true

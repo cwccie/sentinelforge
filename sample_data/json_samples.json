@@ -1,0 +1,79 @@
+[
+  {
+    "event_type": "authentication",
+    "timestamp": "2026-02-23T08:10:00Z",
+    "source_ip": "198.51.100.23",
+    "dest_ip": "10.0.1.50",
+    "username": "administrator",
+    "message": "Failed login attempt from external IP to domain controller",
+    "severity": "HIGH",
+    "category": "Authentication"
+  },
+  {
+    "event_type": "malware_detected",
+    "timestamp": "2026-02-23T08:22:00Z",
+    "source_ip": "10.0.1.10",
+    "hostname": "WORKSTATION-01",
+    "process": "mimikatz.exe",
+    "message": "Credential dumping tool mimikatz.exe detected accessing LSASS process",
+    "severity": "CRITICAL",
+    "category": "Malware"
+  },
+  {
+    "event_type": "dns_query",
+    "timestamp": "2026-02-23T08:30:00Z",
+    "source_ip": "10.0.1.10",
+    "dest_ip": "8.8.8.8",
+    "message": "DNS query for suspicious DGA domain: xk4j9f3ls92kd0f3jd9fk23jf.xyz NXDOMAIN",
+    "severity": "MEDIUM",
+    "category": "DNS Activity"
+  },
+  {
+    "event_type": "lateral_movement",
+    "timestamp": "2026-02-23T08:45:00Z",
+    "source_ip": "10.0.1.10",
+    "dest_ip": "10.0.1.50",
+    "username": "admin1",
+    "message": "psexec connection from compromised workstation to domain controller using admin1 credentials",
+    "severity": "CRITICAL",
+    "category": "Lateral Movement"
+  },
+  {
+    "event_type": "data_exfiltration",
+    "timestamp": "2026-02-23T09:00:00Z",
+    "source_ip": "10.0.1.10",
+    "dest_ip": "198.51.100.23",
+    "username": "jdoe",
+    "message": "Large file upload 2.3GB to external IP via encrypted channel - possible data exfiltration",
+    "severity": "HIGH",
+    "category": "Data Exfiltration"
+  },
+  {
+    "event_type": "phishing",
+    "timestamp": "2026-02-23T07:55:00Z",
+    "source_ip": "203.0.113.66",
+    "dest_ip": "10.0.1.10",
+    "username": "jdoe",
+    "message": "Suspicious phishing email with malicious attachment invoice.pdf.exe opened by user",
+    "severity": "HIGH"
+  },
+  {
+    "event_type": "privilege_escalation",
+    "timestamp": "2026-02-23T08:50:00Z",
+    "source_ip": "10.0.1.10",
+    "hostname": "WORKSTATION-01",
+    "username": "jdoe",
+    "message": "CVE-2024-1234 exploit attempt: local privilege escalation via kernel vulnerability",
+    "severity": "CRITICAL"
+  },
+  {
+    "event_type": "network_connection",
+    "timestamp": "2026-02-23T09:10:00Z",
+    "source_ip": "10.0.1.10",
+    "dest_ip": "203.0.113.66",
+    "dest_port": 8443,
+    "protocol": "TCP",
+    "message": "Outbound beacon connection every 60 seconds to known C2 infrastructure",
+    "severity": "CRITICAL"
+  }
+]

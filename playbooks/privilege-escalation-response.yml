@@ -1,0 +1,74 @@
+name: Privilege Escalation Response
+description: >
+  Response playbook for privilege escalation attempts. Revokes elevated access,
+  collects forensics, and patches exploited vulnerabilities.
+trigger_conditions:
+  mitre_technique_id: "T1068"
+  category: "Privilege Escalation"
+  tags:
+    - privesc
+    - privilege-escalation
+severity_threshold: HIGH
+tags:
+  - privilege-escalation
+  - containment
+
+steps:
+  - name: Alert SOC
+    action: send_notification
+    description: Notify SOC of privilege escalation attempt
+    requires_approval: false
+    parameters:
+      channel: soc-alerts
+      priority: critical
+      message: "Privilege escalation detected — immediate response required"
+
+  - name: Disable Escalated Account
+    action: disable_account
+    description: Immediately disable the account that achieved elevated privileges
+    requires_approval: true
+    parameters:
+      revoke_all_tokens: true
+      preserve_audit_trail: true
+
+  - name: Isolate Affected Host
+    action: isolate_host
+    description: Isolate the host where privilege escalation occurred
+    requires_approval: true
+    parameters:
+      isolation_type: network
+      allow_management_access: true
+
+  - name: Collect Forensic Evidence
+    action: collect_forensics
+    description: Gather process lists, open connections, and system logs
+    requires_approval: false
+    parameters:
+      collection_type: full
+      include:
+        - process_list
+        - network_connections
+        - loaded_modules
+        - scheduled_tasks
+        - system_logs
+
+  - name: Scan for Persistence
+    action: scan_endpoints
+    description: Scan the host for persistence mechanisms (scheduled tasks, services, startup items)
+    requires_approval: false
+    parameters:
+      scope: affected_host
+      scan_type: persistence
+      check_for:
+        - scheduled_tasks
+        - new_services
+        - registry_modifications
+        - startup_items
+
+  - name: Update Vulnerability Assessment
+    action: update_signatures
+    description: Update vulnerability scanners with the exploited CVE
+    requires_approval: false
+    parameters:
+      type: vulnerability_scanner
+      priority: emergency_patch

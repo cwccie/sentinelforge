@@ -1,0 +1,65 @@
+name: Brute Force Response
+description: >
+  Automated response playbook for brute force authentication attacks.
+  Blocks attacking IP, enforces account lockout, and collects evidence.
+trigger_conditions:
+  mitre_technique_id: "T1110"
+  category: "Authentication"
+severity_threshold: HIGH
+tags:
+  - brute-force
+  - credential-access
+  - authentication
+
+steps:
+  - name: Send SOC Alert
+    action: send_notification
+    description: Notify SOC team of brute force attack in progress
+    requires_approval: false
+    parameters:
+      channel: soc-alerts
+      priority: high
+      message: "Brute force attack detected"
+
+  - name: Block Attacking IP
+    action: block_ip
+    description: Add firewall rule to block the attacking source IP
+    requires_approval: true
+    parameters:
+      duration: 24h
+      scope: perimeter
+
+  - name: Force Account Lockout
+    action: disable_account
+    description: Temporarily lock the targeted account to prevent compromise
+    requires_approval: true
+    parameters:
+      lockout_duration: 30m
+      reason: "Brute force protection"
+
+  - name: Collect Authentication Logs
+    action: collect_forensics
+    description: Gather all authentication logs from affected systems
+    requires_approval: false
+    parameters:
+      log_sources:
+        - auth.log
+        - sshd
+        - windows_security
+      time_range: 24h
+
+  - name: Reset Credentials
+    action: reset_credentials
+    description: Force password reset for targeted accounts if compromise suspected
+    requires_approval: true
+    parameters:
+      force_mfa: true
+      notify_user: true
+
+  - name: Update Detection Signatures
+    action: update_signatures
+    description: Update IDS/IPS signatures with attacker IOCs
+    requires_approval: false
+    parameters:
+      type: IDS
+      scope: brute-force-patterns

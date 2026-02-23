@@ -1,0 +1,60 @@
+name: Data Exfiltration Response
+description: >
+  Response playbook for suspected data exfiltration events. Blocks outbound
+  connections, preserves evidence, and initiates breach assessment.
+trigger_conditions:
+  mitre_technique_id: "T1041"
+  category: "Data Exfiltration"
+  tags:
+    - exfiltration
+    - data-loss
+severity_threshold: HIGH
+tags:
+  - exfiltration
+  - data-loss
+  - breach
+
+steps:
+  - name: Critical Alert to CISO
+    action: send_notification
+    description: Immediately notify CISO and legal team of potential data breach
+    requires_approval: false
+    parameters:
+      channel: ciso-alerts
+      priority: critical
+      message: "Potential data exfiltration detected — breach assessment required"
+
+  - name: Block Exfiltration Channel
+    action: block_ip
+    description: Block the destination IP/domain used for data exfiltration
+    requires_approval: true
+    parameters:
+      scope: all_firewalls
+      duration: permanent
+      include_dns_sinkhole: true
+
+  - name: Isolate Source Host
+    action: isolate_host
+    description: Isolate the host performing the data transfer
+    requires_approval: true
+    parameters:
+      isolation_type: network
+      preserve_local_access: true
+
+  - name: Collect Network Captures
+    action: collect_forensics
+    description: Capture network traffic for exfiltration analysis
+    requires_approval: false
+    parameters:
+      collection_type: pcap
+      duration: 1h
+      filter: "host {source_ip}"
+
+  - name: Scan for DLP Violations
+    action: scan_endpoints
+    description: Scan for additional DLP policy violations across the organization
+    requires_approval: false
+    parameters:
+      scope: all_endpoints
+      scan_type: dlp
+      sensitivity: high

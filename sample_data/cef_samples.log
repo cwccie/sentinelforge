@@ -1,0 +1,9 @@
+# SentinelForge sample CEF (Common Event Format) data
+CEF:0|SecurityCo|Firewall|1.0|100|Connection to Known C2 Server|9|src=10.0.1.10 dst=203.0.113.66 dpt=443 spt=54321 proto=TCP act=blocked cat=C2 msg=Outbound connection to known command and control server
+CEF:0|SecurityCo|IDS|2.0|200|Suspicious PowerShell Execution|8|src=10.0.1.25 spt=0 msg=powershell.exe -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQA act=detected suser=admin1 cat=Execution
+CEF:0|SecurityCo|DLP|1.0|300|Large Data Transfer Detected|7|src=10.0.1.10 dst=198.51.100.23 dpt=443 msg=upload 500MB archive to external IP via HTTPS act=exfiltration attempt cat=DataLoss suser=jdoe
+CEF:0|SecurityCo|IDS|2.0|201|Ransomware Activity Detected|10|src=10.0.1.10 msg=Multiple files renamed with .locked extension in rapid succession act=ransomware activity cat=Malware shost=WORKSTATION-01
+CEF:0|SecurityCo|IDS|2.0|202|Credential Dumping Detected|10|src=10.0.1.25 msg=mimikatz.exe detected accessing LSASS process memory act=credential dumping cat=CredentialAccess suser=admin1 shost=ADMIN-WS
+CEF:0|SecurityCo|Firewall|1.0|101|Outbound DNS Tunnel Suspected|6|src=10.0.1.10 dst=8.8.8.8 dpt=53 msg=High volume DNS queries to asdfjkl3490sdkfjh2340sdfkj.xyz proto=UDP cat=Exfiltration
+CEF:0|SecurityCo|WAF|1.0|400|SQL Injection Attempt|7|src=192.0.2.99 dst=10.0.2.100 dpt=443 msg=SQL injection attempt in login form: ' OR 1=1 -- act=blocked cat=WebAttack
+CEF:0|SecurityCo|IDS|2.0|203|Network Scan Detected|5|src=192.0.2.99 dst=10.0.0.0 dpt=0 msg=port scan detected targeting 10.0.0.0/24 act=detected cat=Discovery

@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  sentinelforge:
+    build: .
+    container_name: sentinelforge
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./sample_data:/app/sample_data:ro
+      - ./playbooks:/app/playbooks:ro
+    environment:
+      - FLASK_ENV=production
+      - SENTINELFORGE_LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/v1/metrics"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Optional: Run demo data loader on startup
+  demo-loader:
+    build: .
+    container_name: sentinelforge-demo
+    depends_on:
+      sentinelforge:
+        condition: service_healthy
+    command: >
+      sh -c "sleep 5 && sentinelforge demo"
+    profiles:
+      - demo

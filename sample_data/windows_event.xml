@@ -1,0 +1,30 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-A5BA-3E3B0328C30D}" />
+    <EventID>4625</EventID>
+    <Version>0</Version>
+    <Level>0</Level>
+    <Task>12544</Task>
+    <Opcode>0</Opcode>
+    <Keywords>0x8010000000000000</Keywords>
+    <TimeCreated SystemTime="2026-02-23T08:12:00.000Z" />
+    <EventRecordID>12345</EventRecordID>
+    <Channel>Security</Channel>
+    <Computer>DC01.corp.local</Computer>
+  </System>
+  <EventData>
+    <Data Name="SubjectUserSid">S-1-0-0</Data>
+    <Data Name="SubjectUserName">-</Data>
+    <Data Name="SubjectDomainName">-</Data>
+    <Data Name="TargetUserName">administrator</Data>
+    <Data Name="TargetDomainName">CORP</Data>
+    <Data Name="Status">0xc000006d</Data>
+    <Data Name="FailureReason">Unknown user name or bad password</Data>
+    <Data Name="SubStatus">0xc0000064</Data>
+    <Data Name="LogonType">10</Data>
+    <Data Name="IpAddress">198.51.100.23</Data>
+    <Data Name="IpPort">54321</Data>
+    <Data Name="WorkstationName">ATTACKER-PC</Data>
+    <Data Name="ProcessName">C:\Windows\System32\svchost.exe</Data>
+  </EventData>
+</Event>

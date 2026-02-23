@@ -1,0 +1,5 @@
+# SentinelForge sample LEEF (Log Event Extended Format) data
+LEEF:2.0|IBM|QRadar|3.0|PortScan|src=192.0.2.99	srcPort=0	dst=10.0.1.50	dstPort=445	proto=TCP	sev=5	action=port scan detected targeting SMB
+LEEF:2.0|IBM|QRadar|3.0|BruteForce|src=198.51.100.23	srcPort=54321	dst=10.0.1.50	dstPort=22	proto=TCP	sev=7	usrName=root	action=Multiple failed SSH authentication attempts
+LEEF:2.0|IBM|QRadar|3.0|MalwareDetected|src=10.0.1.10	srcPort=0	dstPort=0	sev=9	usrName=jdoe	srcHostName=WORKSTATION-01	action=Trojan.GenericKD detected in downloaded file
+LEEF:2.0|IBM|QRadar|3.0|LateralMovement|src=10.0.1.25	dst=10.0.1.50	dstPort=445	proto=TCP	sev=8	usrName=admin1	action=psexec remote execution from admin workstation to domain controller
