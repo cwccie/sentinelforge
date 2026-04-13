@@ -42,7 +42,7 @@ ml = [
     "numpy>=1.24",
 ]
 yaml = [
-    "pyyaml>=6.0",
+    "pyyaml>=6.0.3",
 ]
 all = [
     "sentinelforge[web,cli,ml,yaml]",
