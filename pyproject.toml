@@ -39,7 +39,7 @@ cli = [
     "click>=8.0",
 ]
 ml = [
-    "numpy>=1.24",
+    "numpy>=2.2.6",
 ]
 yaml = [
     "pyyaml>=6.0",
