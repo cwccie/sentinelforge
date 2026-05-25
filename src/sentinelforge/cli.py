@@ -46,18 +46,6 @@ def _get_sample_data_dir() -> str:
     return str(candidates[0])
 
 
-def _print_banner():
-    """Print the SentinelForge banner."""
-    banner = f"""
-    ╔══════════════════════════════════════════════════╗
-    ║           SentinelForge v{__version__}                  ║
-    ║       Autonomous SOC Analyst Platform            ║
-    ║                                                  ║
-    ║   Created by Corey A. Wade (CISSP, CCIE #14124)  ║
-    ╚══════════════════════════════════════════════════╝
-    """
-    print(banner)
-
 
 def _print_alert_summary(alerts, title="Alert Summary"):
     """Print a formatted alert summary."""
@@ -200,7 +188,7 @@ def run_demo():
 
     # Final Summary
     print(f"\n{'='*70}")
-    print(f"  DEMO COMPLETE — SentinelForge Pipeline Summary")
+    print(f"  DEMO COMPLETE — SOC Dashboard Pipeline Summary")
     print(f"{'='*70}")
     print(f"  Logs ingested:     {len(sample_logs)}")
     print(f"  Alerts created:    {len(alerts)}")
@@ -244,7 +232,7 @@ if HAS_CLICK:
     @click.group()
     @click.version_option(version=__version__)
     def cli():
-        """SentinelForge — Autonomous SOC Analyst Platform"""
+  
         pass
 
     @cli.command()
@@ -390,7 +378,6 @@ else:
             print(f"  Alerts: {alert_store.count()} | Incidents: {incident_store.count()}")
         else:
             print(f"Unknown command: {args[0]}")
-            print("Install click for full CLI: pip install click")
             print(__doc__)
 
 
