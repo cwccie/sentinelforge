@@ -323,7 +323,7 @@ sentinelforge demo
 
 **Corey A. Wade**
 - CISSP, CCIE #14124
-- PhD Candidate — AI + Cybersecurity
+- PhD — AI + Cybersecurity
 - GitHub: [@cwccie](https://github.com/cwccie)
 
 ---
